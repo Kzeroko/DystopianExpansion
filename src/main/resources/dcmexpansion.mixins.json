@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.kzeroko.dcmexpansion.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "dcmexpansion.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

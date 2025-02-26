@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "dcmexpansion:temperature_unit_normal",
+    "dcmexpansion:temperature_unit_elite"
+  ]
+}
