@@ -3,10 +3,7 @@ package net.kzeroko.dcmexpansion.item.dcmhealing;
 import net.kzeroko.dcmexpansion.config.DcmExpansionConfig;
 import net.kzeroko.dcmexpansion.item.KitItem;
 import net.kzeroko.dcmexpansion.registry.DcmEffects;
-import net.kzeroko.dcmexpansion.util.HealItemUtil;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -26,14 +23,6 @@ public class FirstAidKit extends KitItem {
     @Override
     public int getUseDuration(@NotNull ItemStack stack) {
         return (getUsagePlayer() != null && getUsagePlayer().hasEffect(DcmEffects.FAST_HEAL.get())) ? 50 : 100;
-    }
-
-    @Override
-    public void onUseTick(@NotNull Level pLevel, @NotNull LivingEntity le, @NotNull ItemStack pStack, int pRemainingUseDuration) {
-        Level world = le.level();
-        if (le instanceof Player player && !le.level().isClientSide()) {
-            HealItemUtil.playMedKitSound(player, world);
-        }
     }
 
     @Override

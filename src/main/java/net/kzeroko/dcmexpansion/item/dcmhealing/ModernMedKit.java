@@ -3,7 +3,6 @@ package net.kzeroko.dcmexpansion.item.dcmhealing;
 import net.kzeroko.dcmexpansion.config.DcmExpansionConfig;
 import net.kzeroko.dcmexpansion.item.KitItem;
 import net.kzeroko.dcmexpansion.registry.DcmEffects;
-import net.kzeroko.dcmexpansion.util.HealItemUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -39,14 +38,6 @@ public class ModernMedKit extends KitItem {
                     server.modernMedkitResistanceSeconds.get() * 20,2,false,false,false));
         }
         return super.finishUsingItem(stack, world, le);
-    }
-
-    @Override
-    public void onUseTick(@NotNull Level pLevel, @NotNull LivingEntity le, @NotNull ItemStack pStack, int pRemainingUseDuration) {
-        Level world = le.level();
-        if (le instanceof Player player && !world.isClientSide()) {
-            HealItemUtil.playMedKitSound(player, world);
-        }
     }
 
     @Override

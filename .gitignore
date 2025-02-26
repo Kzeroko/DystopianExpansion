@@ -119,3 +119,4 @@ run/
 
 /gradle/wrapper/gradle-8.9-bin.zip
 /externalmods/
+*.bbmodel

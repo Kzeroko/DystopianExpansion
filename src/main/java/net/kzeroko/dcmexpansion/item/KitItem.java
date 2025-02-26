@@ -2,6 +2,7 @@ package net.kzeroko.dcmexpansion.item;
 
 import ichttt.mods.firstaid.api.damagesystem.AbstractPlayerDamageModel;
 import ichttt.mods.firstaid.common.util.CommonUtils;
+import net.kzeroko.dcmexpansion.util.HealItemUtil;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -39,6 +40,18 @@ public abstract class KitItem extends Item {
         }
 
         return stack;
+    }
+
+    @Override
+    public void onUseTick(@NotNull Level pLevel, @NotNull LivingEntity le, @NotNull ItemStack pStack, int pRemainingUseDuration) {
+        Level world = le.level();
+        if (le instanceof Player player && !world.isClientSide()) {
+            if (player.isSprinting()) {
+                player.setSprinting(false);
+            }
+
+            HealItemUtil.playMedKitSound(player, world);
+        }
     }
 
     @Nonnull
