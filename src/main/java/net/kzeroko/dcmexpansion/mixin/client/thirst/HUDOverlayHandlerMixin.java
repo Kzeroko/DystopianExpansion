@@ -1,4 +1,4 @@
-/*package net.kzeroko.dcmexpansion.mixin.client.thirst;
+package net.kzeroko.dcmexpansion.mixin.client.thirst;/*package net.kzeroko.dcmexpansion.mixin.client.thirst;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.ghen.thirst.foundation.gui.appleskin.HUDOverlayHandler;

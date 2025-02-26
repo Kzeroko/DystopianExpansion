@@ -5,7 +5,6 @@ import net.kzeroko.dcmexpansion.item.KitItem;
 import net.kzeroko.dcmexpansion.registry.DcmEffects;
 import net.kzeroko.dcmexpansion.util.HealItemUtil;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -44,8 +43,8 @@ public class ModernMedKit extends KitItem {
 
     @Override
     public void onUseTick(@NotNull Level pLevel, @NotNull LivingEntity le, @NotNull ItemStack pStack, int pRemainingUseDuration) {
-        Level world = le.getLevel();
-        if (le instanceof Player player && !le.getLevel().isClientSide()) {
+        Level world = le.level();
+        if (le instanceof Player player && !world.isClientSide()) {
             HealItemUtil.playMedKitSound(player, world);
         }
     }
@@ -53,7 +52,7 @@ public class ModernMedKit extends KitItem {
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> text, @NotNull TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, text, pIsAdvanced);
-        text.add(new TranslatableComponent("tooltip.dcmexpansion.firstaid_kit", getHealPercentage()));
-        text.add(new TranslatableComponent("tooltip.dcmexpansion.modernmedkit"));
+        text.add(Component.translatable("tooltip.dcmexpansion.firstaid_kit", getHealPercentage()));
+        text.add(Component.translatable("tooltip.dcmexpansion.modernmedkit"));
     }
 }

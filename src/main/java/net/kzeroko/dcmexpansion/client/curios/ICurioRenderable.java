@@ -21,6 +21,7 @@ import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 import java.util.List;
 
+@SuppressWarnings("removal")
 public interface ICurioRenderable {
     @OnlyIn(Dist.CLIENT)
     default CurioModel getModel(ItemStack stack) {

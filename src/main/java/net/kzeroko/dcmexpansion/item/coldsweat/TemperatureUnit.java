@@ -1,9 +1,9 @@
 package net.kzeroko.dcmexpansion.item.coldsweat;
 
 import com.momosoftworks.coldsweat.api.util.Temperature;
-import com.momosoftworks.coldsweat.common.capability.EntityTempManager;
-import com.momosoftworks.coldsweat.common.capability.PlayerTempCap;
-import com.momosoftworks.coldsweat.config.ColdSweatConfig;
+import com.momosoftworks.coldsweat.common.capability.handler.EntityTempManager;
+import com.momosoftworks.coldsweat.common.capability.temperature.PlayerTempCap;
+import com.momosoftworks.coldsweat.config.spec.MainSettingsConfig;
 import com.momosoftworks.coldsweat.core.init.EffectInit;
 import mekanism.api.energy.IEnergyContainer;
 import mekanism.api.math.FloatingLong;
@@ -12,8 +12,7 @@ import net.kzeroko.dcmexpansion.item.EnergyCurioItem;
 import net.kzeroko.dcmexpansion.util.EnergyUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +36,7 @@ public class TemperatureUnit extends EnergyCurioItem {
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity le = slotContext.entity();
-        if (!le.level.isClientSide() && le.tickCount % 20 == 0) {
+        if (!le.level().isClientSide() && le.tickCount % 20 == 0) {
 
             IEnergyContainer energyContainer = StorageUtils.getEnergyContainer(stack, 0);
             FloatingLong energy = energyContainer == null ? FloatingLong.ZERO : energyContainer.getEnergy();
@@ -48,9 +47,9 @@ public class TemperatureUnit extends EnergyCurioItem {
                 EntityTempManager.getTemperatureCap(slotContext.entity()).ifPresent((icap) -> {
 
                     if (icap instanceof PlayerTempCap cap) {
-                        double capTemp = cap.getTemp(Temperature.Type.WORLD);
-                        double freezeP = ColdSweatConfig.getInstance().getMinTempHabitable();
-                        double burnP = ColdSweatConfig.getInstance().getMaxTempHabitable();
+                        double capTemp = cap.getTrait(Temperature.Trait.WORLD);
+                        double freezeP = MainSettingsConfig.MIN_HABITABLE_TEMPERATURE.get();
+                        double burnP = MainSettingsConfig.MAX_HABITABLE_TEMPERATURE.get();
 
                         double realTempC = toCelsius(capTemp);
                         double realFreezeP = toCelsius(freezeP);
@@ -61,49 +60,27 @@ public class TemperatureUnit extends EnergyCurioItem {
                                 Component.nullToEmpty("World: " + realTempC + " | " + "freezeP: " + realFreezeP + " | " + "burnP: " + realBurnP),
                                 true);*/
 
-                        if (realTempC <= realFreezeP || realTempC >= realBurnP) {
-                            le.addEffect(new MobEffectInstance(EffectInit.INSULATED.get(), 60, strength, true, false));
-                            extractEquippedEnergy(slotContext.entity(), energyCost);
+                        boolean isOn;
+                        MobEffect effect = null;
+                        if (realTempC <= realFreezeP) {
+                            isOn = true;
+                            effect = EffectInit.WARMTH.get();
+                        } else if (realTempC >= realBurnP) {
+                            isOn = true;
+                            effect = EffectInit.FRIGIDNESS.get();
                         } else {
-                            extractEquippedEnergy(slotContext.entity(), energyCost.multiply(0.5));
+                            isOn = false;
                         }
+
+                        if (effect != null) {
+                            le.addEffect(new MobEffectInstance(effect, 60, strength, true, false));
+                        }
+
+                        extractEquippedEnergy(slotContext.entity(), isOn ? energyCost : energyCost.multiply(0.5));
 
                     }
                 });
 
-                /*EntityTempManager.getTemperatureCap(slotContext.entity()).ifPresent((icap) -> {
-
-                    if (icap instanceof PlayerTempCap cap) {
-                        double capTemp = cap.getTemp(Temperature.Type.CORE);
-                        double freezeP = cap.getTemp(Temperature.Type.FREEZING_POINT);
-                        double burnP = cap.getTemp(Temperature.Type.BURNING_POINT);
-
-                        double realTempC = toCelsius(capTemp);
-                        double realFreezeP = toCelsius(freezeP);
-                        double realBurnP = toCelsius(burnP);
-
-                        double lowerRange = realFreezeP + range * (realBurnP - realFreezeP);
-                        double upperRange = realBurnP - range * (realBurnP - realFreezeP);
-
-                        if (realTempC < lowerRange || realTempC > upperRange) {
-
-                            if (realTempC < lowerRange) {
-                                realTempC += strength;
-                            }
-
-                            if (realTempC > upperRange) {
-                                realTempC -= strength;
-                            }
-
-                            cap.setTemp(Temperature.Type.CORE, toMCTemp(realTempC));
-                            extractEquippedEnergy(slotContext.entity(), energyCost);
-
-                        }
-
-                        //cap.setTemp(Temperature.Type.CORE, toMCTemp(18)); //test
-                        //extractEquippedEnergy(slotContext.entity(), energyCost); //test
-                    }
-                });*/
             }
 
         }
@@ -112,18 +89,18 @@ public class TemperatureUnit extends EnergyCurioItem {
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> text, @NotNull TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, text, pIsAdvanced);
-        text.add(TextComponent.EMPTY);
-        text.add(new TranslatableComponent("tooltip.dcmexpansion.temperature_unit.usage1").withStyle(ChatFormatting.GRAY));
-        text.add(new TranslatableComponent("tooltip.dcmexpansion.temperature_unit.usage2", costSec).withStyle(ChatFormatting.GRAY));
-        text.add(new TranslatableComponent("tooltip.dcmexpansion.temperature_unit.usage3", costSec / 2).withStyle(ChatFormatting.GRAY));
+        text.add(Component.empty());
+        text.add(Component.translatable("tooltip.dcmexpansion.temperature_unit.usage1").withStyle(ChatFormatting.GRAY));
+        text.add(Component.translatable("tooltip.dcmexpansion.temperature_unit.usage2", costSec).withStyle(ChatFormatting.GRAY));
+        text.add(Component.translatable("tooltip.dcmexpansion.temperature_unit.usage3", costSec / 2).withStyle(ChatFormatting.GRAY));
     }
 
     private double toCelsius(double mcTemp) {
-        return Temperature.convertUnits(mcTemp, Temperature.Units.MC, Temperature.Units.C, true);
+        return Temperature.convert(mcTemp, Temperature.Units.MC, Temperature.Units.C, true);
     }
 
     private double toMCTemp(double celsius) {
-        return Temperature.convertUnits(celsius, Temperature.Units.C, Temperature.Units.MC, true);
+        return Temperature.convert(celsius, Temperature.Units.C, Temperature.Units.MC, true);
     }
 
 }

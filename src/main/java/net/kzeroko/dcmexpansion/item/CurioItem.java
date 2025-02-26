@@ -1,6 +1,5 @@
 package net.kzeroko.dcmexpansion.item;
 
-import net.kzeroko.dcmexpansion.DcmExpansion;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -17,7 +16,7 @@ import javax.annotation.Nullable;
 public class CurioItem extends Item implements ICurioItem {
 
     public CurioItem(int durability) {
-        super(new Properties().tab(DcmExpansion.INTEGRATION).stacksTo(1).durability(durability));
+        super(new Properties().stacksTo(1).durability(durability));
     }
 
     public boolean isEquippedBy(@Nullable LivingEntity entity) {

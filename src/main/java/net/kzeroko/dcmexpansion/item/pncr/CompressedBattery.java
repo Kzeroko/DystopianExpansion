@@ -1,11 +1,9 @@
 package net.kzeroko.dcmexpansion.item.pncr;
 
 import me.desht.pneumaticcraft.common.core.ModItems;
-import net.kzeroko.dcmexpansion.DcmExpansion;
 import net.kzeroko.dcmexpansion.config.DcmExpansionConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +18,7 @@ import java.util.List;
 
 public class CompressedBattery extends Item {
     public CompressedBattery() {
-        super((new Item.Properties()).tab(DcmExpansion.INTEGRATION).stacksTo(1));
+        super((new Properties()).stacksTo(1));
     }
 
 
@@ -47,7 +45,7 @@ public class CompressedBattery extends Item {
                         if (player.getCooldowns().isOnCooldown(this)) {
                             return InteractionResultHolder.fail(heldStack);
                         } else if (cUses <= 0) {
-                            player.sendMessage(new TranslatableComponent("message.dcmexpansion.cb_outofuse"), player.getUUID());
+                            player.sendSystemMessage(Component.translatable("message.dcmexpansion.cb_outofuse"));
                             return InteractionResultHolder.fail(heldStack);
                         } else {
                             cUses--;
@@ -79,13 +77,13 @@ public class CompressedBattery extends Item {
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> text, @NotNull TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, text, pIsAdvanced);
-        text.add(new TranslatableComponent("tooltip.dcmexpansion.compressed_battery"));
+        text.add(Component.translatable("tooltip.dcmexpansion.compressed_battery"));
         if (pStack.getTag() != null) {
             CompoundTag uses = pStack.getTag();
             int cUses = uses.getInt("cb_uses");
-            text.add(new TranslatableComponent("tooltip.dcmexpansion.compressed_battery_amount", cUses));
+            text.add(Component.translatable("tooltip.dcmexpansion.compressed_battery_amount", cUses));
         } else {
-            text.add(new TranslatableComponent("tooltip.dcmexpansion.compressed_battery_amount_na"));
+            text.add(Component.translatable("tooltip.dcmexpansion.compressed_battery_amount_na"));
         }
 
     }

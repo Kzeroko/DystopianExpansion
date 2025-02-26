@@ -5,7 +5,7 @@ import net.kzeroko.dcmexpansion.internal.DcmTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,7 +33,7 @@ public class BetterCombatHitPacket {
         return new BetterCombatHitPacket(buf.readInt(), buf.readList(FriendlyByteBuf::readInt), buf.readInt());
     }
 
-    public static void encode(BetterCombatHitPacket packet , FriendlyByteBuf buf) {
+    public static void encode(BetterCombatHitPacket packet, FriendlyByteBuf buf) {
         buf.writeInt(packet.hand);
         buf.writeCollection(packet.hitEntityIds, FriendlyByteBuf::writeInt);
         buf.writeInt(packet.cursorEntityId);
@@ -49,13 +49,13 @@ public class BetterCombatHitPacket {
                     // Get all available entities
                     List<Entity> hitEntityList = packet.hitEntityIds
                             .stream()
-                            .map(id -> player.getLevel().getEntity(id))
+                            .map(id -> player.level().getEntity(id))
                             .filter(Objects::nonNull)
                             .filter(entity -> entity instanceof LivingEntity)
                             .toList();
 
                     // We are not using it much for now
-                    Entity cursorEntity = player.getLevel().getEntity(packet.cursorEntityId);
+                    Entity cursorEntity = player.level().getEntity(packet.cursorEntityId);
 
                     // We get correct itemStack stats with corresponding hand
                     boolean isMainHand = packet.hand == 0;
@@ -113,7 +113,7 @@ public class BetterCombatHitPacket {
 
                         // We deal fixed percentage damage with armor piercing
                         TaskScheduler.scheduleServer(() -> {
-                            livingEntity.hurt(DamageSource.playerAttack(player).bypassArmor(), finalDamage);
+                            livingEntity.hurt(player.damageSources().source(DamageTypes.PLAYER_ATTACK, player), finalDamage);
                         }, 1);
 
                         // TODO: Maybe we should cancel the original damage, IDK

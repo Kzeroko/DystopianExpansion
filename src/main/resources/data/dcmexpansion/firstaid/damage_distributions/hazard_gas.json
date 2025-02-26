@@ -1,16 +1,15 @@
 {
   "type": "firstaid:static",
-  "damageTypes": ["lightning_bolt"],
+  "damageTypes": ["dcmexpansion:hazard_gas"],
   "algorithm": {
     "type": "firstaid:standard",
-    "ignoreOrder": true,
+    "ignoreOrder": false,
     "partMap": {
+      "chest": [
+        "body"
+      ],
       "head": [
         "head"
-      ],
-      "chest": [
-        "left_arm",
-        "right_arm"
       ]
     }
   }

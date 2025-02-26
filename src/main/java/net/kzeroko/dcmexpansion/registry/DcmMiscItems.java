@@ -9,8 +9,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class DcmMiscItems {
 
-    public static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, DcmExpansion.MOD_ID);
-    public static final RegistryObject<Item> WATERBOTTLE_EMPTY = REGISTER.register( "waterbottle_empty", () -> new Item(new Item.Properties().stacksTo(64).tab(DcmExpansion.FOODS_AND_DRINKS)));
-    public static final RegistryObject<Item> WATERBOTTLE_FILLED = REGISTER.register( "waterbottle_filled", () -> new DrinkableItem(new Item.Properties().craftRemainder(WATERBOTTLE_EMPTY.get())));
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DcmExpansion.MOD_ID);
+
+    public static final RegistryObject<Item> WATERBOTTLE_EMPTY = ITEMS.register( "waterbottle_empty", () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> WATERBOTTLE_FILLED = ITEMS.register( "waterbottle_filled", () -> new DrinkableItem(new Item.Properties().craftRemainder(WATERBOTTLE_EMPTY.get())));
 
 }

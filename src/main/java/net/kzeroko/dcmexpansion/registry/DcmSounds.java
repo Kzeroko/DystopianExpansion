@@ -7,9 +7,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class DcmSounds
-{
-	public static final DeferredRegister<SoundEvent> REGISTER = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, DcmExpansion.MOD_ID);
+public class DcmSounds {
+
+	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, DcmExpansion.MOD_ID);
+
 	public static final RegistryObject<SoundEvent> ADRENALINE_OPEN = register("item.adrenaline.open");
 	public static final RegistryObject<SoundEvent> ADRENALINE_INJECT = register("item.adrenaline.inject");
 	public static final RegistryObject<SoundEvent> MODERNMEDKIT_1 = register("item.modernmedkit.1");
@@ -23,6 +24,6 @@ public class DcmSounds
 	public static final RegistryObject<SoundEvent> WEATHER_TESTER = register("item.weathertester.test");
 
 	private static RegistryObject<SoundEvent> register(String key) {
-		return REGISTER.register(key, () -> new SoundEvent(new ResourceLocation(DcmExpansion.MOD_ID, key)));
+		return SOUNDS.register(key, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(DcmExpansion.MOD_ID, key)));
 	}
 }

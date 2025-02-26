@@ -14,11 +14,11 @@ public class HazardGasEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(@NotNull LivingEntity entity, int amplifier) {
-        if (entity instanceof Player player && !player.level.isClientSide() && !player.isCreative()) {
+        if (entity instanceof Player player && !player.level().isClientSide() && !player.isCreative()) {
 
             int multiplier = Math.min(amplifier + 1, 5);
 
-            entity.hurt(DcmDamageSources.HAZARD_GAS, 2.0F * multiplier);
+            entity.hurt(DcmDamageSources.Sources.hazardGas(player.level().registryAccess()), 2.0F * multiplier);
         }
     }
 

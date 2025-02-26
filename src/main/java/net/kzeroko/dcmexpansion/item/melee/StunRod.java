@@ -23,7 +23,7 @@ public class StunRod extends EnergyMeleeItem {
 
     @Override
     public boolean hurtEnemy(@NotNull ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
-        if (attacker instanceof Player player && !player.level.isClientSide()) {
+        if (attacker instanceof Player player && !player.level().isClientSide()) {
 
             IEnergyContainer energyContainer = StorageUtils.getEnergyContainer(stack, 0);
             FloatingLong energy = energyContainer == null ? FloatingLong.ZERO : energyContainer.getEnergy();

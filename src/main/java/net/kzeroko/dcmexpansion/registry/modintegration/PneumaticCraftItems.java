@@ -9,7 +9,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class PneumaticCraftItems {
 
-    public static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, DcmExpansion.MOD_ID);
-    public static final RegistryObject<Item> COMPRESSED_BATTERY = REGISTER.register( "compressed_battery", CompressedBattery::new);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DcmExpansion.MOD_ID);
+
+    public static final RegistryObject<Item> COMPRESSED_BATTERY = ITEMS.register( "compressed_battery", CompressedBattery::new);
 
 }

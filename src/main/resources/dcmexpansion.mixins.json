@@ -2,11 +2,22 @@
   "required": true,
   "minVersion": "0.8",
   "package": "net.kzeroko.dcmexpansion.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "dcmexpansion.refmap.json",
+  "plugin": "net.kzeroko.dcmexpansion.mixin.DcmMixinPlugin",
   "mixins": [
+    "common.AnvilMenuMixin",
+    "common.ItemFrameMixin",
+    "common.LivingEntityMixin",
+    "common.MobMixin",
+    "common.securitycraft.BlockPocketWallBlockMixin",
+    "common.tacz.EntityKineticBulletMixin"
   ],
   "client": [
+    "client.AbstractClientPlayerMixin",
+    "client.EntityRendererMixin",
+    "client.GuiMixin",
+    "client.firstaid.GuiHealthScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

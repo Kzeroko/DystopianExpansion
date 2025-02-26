@@ -3,7 +3,7 @@ package net.kzeroko.dcmexpansion.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class DcmExpansionConfig { // TODO: Add more configurables
+public class DcmExpansionConfig { // TODO: Add more configurable-s
 
     public static final ForgeConfigSpec serverSpec;
     public static final ForgeConfigSpec clientSpec;

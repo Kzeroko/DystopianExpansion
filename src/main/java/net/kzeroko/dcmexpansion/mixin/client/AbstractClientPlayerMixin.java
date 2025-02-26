@@ -13,6 +13,7 @@ import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
 import net.kzeroko.dcmexpansion.DcmExpansion;
+import net.kzeroko.dcmexpansion.client.DcmAnimManager;
 import net.kzeroko.dcmexpansion.item.KitItem;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -33,13 +34,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = AbstractClientPlayer.class, priority = 1001)
 public abstract class AbstractClientPlayerMixin extends Player {
 
+    // Animation Manager
+    @Unique
+    private final DcmAnimManager animManager = DcmAnimManager.getInstance();
+
     // Layer
     @Unique
     private final ModifierLayer<IAnimation> animLayer = new ModifierLayer<>();
-
-    // Common anim
-    @Unique
-    public KeyframeAnimation anim_test = null;
 
     // Basics
     @Unique
@@ -67,7 +68,11 @@ public abstract class AbstractClientPlayerMixin extends Player {
     private void initAnim(ClientLevel pClientLevel, GameProfile pGameProfile, CallbackInfo ci) {
         PlayerAnimationAccess.getPlayerAnimLayer((AbstractClientPlayer) (Object) this).addAnimLayer(1500, animLayer);
 
-        anim_test = PlayerAnimationRegistry.getAnimation(new ResourceLocation(DcmExpansion.MOD_ID, "eating"));
+        animManager.registerAnim(
+                PlayerAnimationRegistry.getAnimation(new ResourceLocation(DcmExpansion.MOD_ID, "kititem")),
+                this::isUsingKit,
+                1
+        );
 
     }
 
@@ -75,21 +80,22 @@ public abstract class AbstractClientPlayerMixin extends Player {
     public void tick() {
         super.tick();
 
-        KeyframeAnimation anim = null;
+        KeyframeAnimation anim = animManager.getFirstMatchingAnim((AbstractClientPlayer) (Object) this);
 
-        boolean isUsingKit = isUsingItem() && getUseItem().getItem() instanceof KitItem;
-
-        if (isUsingKit && !animSwitch) {
+        if (anim != null && !animSwitch) {
             animSwitch = true;
-        } else if (!isUsingKit && animSwitch) {
+        } else if (anim == null && animSwitch) {
             animSwitch = false;
             removeAnim();
         }
 
         if (animSwitch) {
-            anim = anim_test;
-            playAnim(anim, 1.0F, 0, true);
+            playAnim(anim, 1.0F, 10, true);
         }
+    }
+
+    private boolean isUsingKit(Player player) {
+        return player.isUsingItem() && player.getUseItem().getItem() instanceof KitItem;
     }
 
     @Unique
@@ -124,7 +130,7 @@ public abstract class AbstractClientPlayerMixin extends Player {
             layer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(fade, Ease.INOUTSINE), // AbstractFadeModifier.functionalFadeIn(20, (modelName, type, value) -> value)
                     new KeyframeAnimationPlayer(anim)
                             .setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL)
-                            .setFirstPersonConfiguration(new FirstPersonConfiguration().setShowRightArm(true).setShowLeftItem(true))
+                            .setFirstPersonConfiguration(new FirstPersonConfiguration().setShowLeftArm(true).setShowRightArm(true).setShowLeftItem(true))
             );
         } else {
             layer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(fade, Ease.INOUTSINE), new KeyframeAnimationPlayer(anim));

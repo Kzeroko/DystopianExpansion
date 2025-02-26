@@ -1,6 +1,5 @@
 package net.kzeroko.dcmexpansion.item;
 
-import net.kzeroko.dcmexpansion.DcmExpansion;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -17,13 +16,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class DrinkableItem extends Item {
     public DrinkableItem(Properties properties) {
-        super((properties.tab(DcmExpansion.FOODS_AND_DRINKS).stacksTo(16)));
+        super((properties.stacksTo(16)));
     }
 
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity consumer) {
 
-        ItemStack containerStack = stack.getContainerItem();
+        ItemStack containerStack = stack.getCraftingRemainingItem();
         Player player;
         if (stack.isEdible()) {
             super.finishUsingItem(stack, level, consumer);

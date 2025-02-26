@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 @OnlyIn(Dist.CLIENT)
-public class AnimManager {
+public class DcmAnimManager {
     private final List<AnimationEntry> entries = new ArrayList<>();
 
     public void registerAnim(KeyframeAnimation animation, Predicate<Player> condition, int priority) {
@@ -18,8 +18,8 @@ public class AnimManager {
         entries.sort(Comparator.comparingInt(AnimationEntry::priority).reversed());
     }
 
-    public static AnimManager getInstance() {
-        return new AnimManager();
+    public static DcmAnimManager getInstance() {
+        return new DcmAnimManager();
     }
 
     @Nullable

@@ -2,7 +2,6 @@ package net.kzeroko.dcmexpansion.item;
 
 import ichttt.mods.firstaid.api.damagesystem.AbstractPlayerDamageModel;
 import ichttt.mods.firstaid.common.util.CommonUtils;
-import net.kzeroko.dcmexpansion.DcmExpansion;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -21,7 +20,7 @@ public abstract class KitItem extends Item {
     private Player usagePlayer;
 
     public KitItem() {
-        super((new Properties()).tab(DcmExpansion.HEALING).stacksTo(4));
+        super((new Properties()).stacksTo(4));
     }
 
     public abstract int getHealPercentage();

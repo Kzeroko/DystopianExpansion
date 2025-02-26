@@ -6,7 +6,6 @@ import mekanism.api.energy.IEnergyContainer;
 import mekanism.api.math.FloatingLong;
 import mekanism.common.item.ItemEnergized;
 import mekanism.common.util.StorageUtils;
-import net.kzeroko.dcmexpansion.DcmExpansion;
 import net.kzeroko.dcmexpansion.util.EnergyUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +31,7 @@ public class EnergyCurioItem extends ItemEnergized implements ICurioItem {
         super(
                 ()-> FloatingLong.createConst(EnergyUtil.convertEnergy(chargeRate, EnergyUtil.Type.FE, EnergyUtil.Type.J)),
                 ()-> FloatingLong.createConst(EnergyUtil.convertEnergy(capacity, EnergyUtil.Type.FE, EnergyUtil.Type.J)),
-                (new Properties()).tab(DcmExpansion.INTEGRATION).stacksTo(1)
+                (new Properties()).stacksTo(1)
         );
     }
 
@@ -87,7 +86,7 @@ public class EnergyCurioItem extends ItemEnergized implements ICurioItem {
     }
 
     protected <T extends LivingEvent> void addListener(EventPriority priority, Class<T> eventClass, BiConsumer<T, LivingEntity> listener) {
-        addListener(priority, eventClass, listener, LivingEvent::getEntityLiving);
+        addListener(priority, eventClass, listener, LivingEvent::getEntity);
     }
 
     protected <T extends LivingEvent> void addListener(Class<T> eventClass, BiConsumer<T, LivingEntity> listener) {

@@ -1,27 +1,25 @@
 package net.kzeroko.dcmexpansion.registry;
 
-import ichttt.mods.firstaid.api.item.ItemHealing;
+import ichttt.mods.firstaid.api.healing.ItemHealing;
 import ichttt.mods.firstaid.common.damagesystem.PartHealer;
 import net.kzeroko.dcmexpansion.DcmExpansion;
 import net.kzeroko.dcmexpansion.config.DcmExpansionConfig;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.*;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.IntSupplier;
 
-@ObjectHolder("dcmexpansion")
 public class DcmFirstaidItems {
-    public static void init(IForgeRegistry<Item> ItemReg) {
-        DcmExpansionConfig.ServerSide server = DcmExpansionConfig.SERVER_SIDE;
 
-        ItemReg.register(ItemHealing.create((new Item.Properties()).stacksTo(3),
-                new ResourceLocation(DcmExpansion.MOD_ID, "bandage_pro"), (stack) -> {
-                IntSupplier secondsPerHeal = () -> server.bandage_pro.secondsPerHeal.get() * 20;
-                IntSupplier totalHeals = server.bandage_pro.totalHeals::get;
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DcmExpansion.MOD_ID);
+
+    public static final RegistryObject<Item> BANDAGE_PRO = ITEMS.register("bandage_pro", () ->
+            ItemHealing.create((new Item.Properties()).stacksTo(3), (stack) -> {
+                IntSupplier secondsPerHeal = () -> DcmExpansionConfig.SERVER_SIDE.bandage_pro.secondsPerHeal.get() * 20;
+                IntSupplier totalHeals = DcmExpansionConfig.SERVER_SIDE.bandage_pro.totalHeals::get;
                 return new PartHealer(secondsPerHeal, totalHeals, stack);
-            }, (stack) -> server.bandage_pro.applyTime.get()
-        ));
-    }
+            }, (stack) -> DcmExpansionConfig.SERVER_SIDE.bandage_pro.applyTime.get()));
 
 }

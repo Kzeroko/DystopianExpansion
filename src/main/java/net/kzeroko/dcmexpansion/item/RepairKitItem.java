@@ -1,6 +1,5 @@
 package net.kzeroko.dcmexpansion.item;
 
-import net.kzeroko.dcmexpansion.DcmExpansion;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -8,7 +7,7 @@ import net.minecraft.world.item.Rarity;
 public class RepairKitItem extends Item {
     private final float fixAmount;
     public RepairKitItem(float fixAmount) {
-        super((new Properties()).tab(DcmExpansion.INTEGRATION).stacksTo(32).rarity(Rarity.RARE));
+        super((new Properties()).stacksTo(32).rarity(Rarity.RARE));
         this.fixAmount = fixAmount;
     }
 

@@ -10,9 +10,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ColdSweatItems {
 
-    public static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, DcmExpansion.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DcmExpansion.MOD_ID);
+
     public static final RegistryObject<EnergyCurioItem> TEMPERATURE_UNIT_NORMAL =
-            REGISTER.register( "temperature_unit_normal", ()-> new TemperatureUnit(10, 6000, 5, 4));
+            ITEMS.register( "temperature_unit_normal", ()-> new TemperatureUnit(10, 6000, 5, 4));
     public static final RegistryObject<EnergyCurioItem> TEMPERATURE_UNIT_ELITE =
-            REGISTER.register( "temperature_unit_elite", ()-> new TemperatureUnit(20, 9000, 3, 9));
+            ITEMS.register( "temperature_unit_elite", ()-> new TemperatureUnit(20, 9000, 3, 9));
 }

@@ -27,7 +27,7 @@ public class DcmExpansionClient {
             if (!(item instanceof ICurioRenderable)) continue;
 
             CuriosRendererRegistry.register(item, CurioRenderer::new);
-            DcmExpansion.MOD_LOGGER.info("Registered curios renderer for {}", ForgeRegistries.ITEMS.getKey(item));
+            DcmExpansion.LOGGER.info("Registered curios renderer for {}", ForgeRegistries.ITEMS.getKey(item));
         }
 
         // Register better combat event

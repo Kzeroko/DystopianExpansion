@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @OnlyIn(Dist.CLIENT)
-@Mixin(value = GuiHealthScreen.class, priority = 1001, remap = false)
-public abstract class ItemHealingMixin {
+@Mixin(value = GuiHealthScreen.class, priority = 1001)
+public abstract class GuiHealthScreenMixin {
 
     @WrapOperation(
             method = "init",
@@ -26,7 +26,7 @@ public abstract class ItemHealingMixin {
     )
     private int modifyFirstAidPartHealingTime(ItemHealing instance, ItemStack itemStack, Operation<Integer> original) {
 
-        int originalTime = instance.getApplyTime(itemStack);
+        int originalTime = original.call(instance, itemStack);
 
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer player = minecraft.player;

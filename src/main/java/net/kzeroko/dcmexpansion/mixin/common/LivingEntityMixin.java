@@ -7,7 +7,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.smileycorp.hordes.common.infection.HordesInfection;
+import net.smileycorp.hordes.infection.HordesInfection;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,7 +38,7 @@ public class LivingEntityMixin {
     private void onHurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity entity = (LivingEntity) (Object) this;
 
-        if (pSource == DcmDamageSources.HAZARD_GAS && entity.hasEffect(DcmEffects.HAZARD_GRACE.get())){
+        if (pSource.is(DcmDamageSources.HAZARD_GAS) && entity.hasEffect(DcmEffects.HAZARD_GRACE.get())){
             cir.setReturnValue(false);
         }
     }

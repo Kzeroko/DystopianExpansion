@@ -1,11 +1,9 @@
 package net.kzeroko.dcmexpansion.item.dcmhealing;
 
-import net.kzeroko.dcmexpansion.DcmExpansion;
 import net.kzeroko.dcmexpansion.config.DcmExpansionConfig;
 import net.kzeroko.dcmexpansion.registry.DcmEffects;
 import net.kzeroko.dcmexpansion.registry.DcmSounds;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.smileycorp.hordes.common.infection.HordesInfection;
+import net.smileycorp.hordes.infection.HordesInfection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,7 +26,7 @@ import java.util.List;
 
 public class AntiInfectionSerum extends Item {
     public AntiInfectionSerum() {
-        super((new Properties()).tab(DcmExpansion.HEALING).stacksTo(8));
+        super((new Properties()).stacksTo(8));
     }
 
     @Nonnull
@@ -76,6 +74,6 @@ public class AntiInfectionSerum extends Item {
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> text, @NotNull TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, text, pIsAdvanced);
-        text.add(new TranslatableComponent("tooltip.dcmexpansion.antiinfection_serum"));
+        text.add(Component.translatable("tooltip.dcmexpansion.antiinfection_serum"));
     }
 }

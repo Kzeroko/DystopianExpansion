@@ -6,7 +6,6 @@ import mekanism.api.energy.IEnergyContainer;
 import mekanism.api.math.FloatingLong;
 import mekanism.common.item.ItemEnergized;
 import mekanism.common.util.StorageUtils;
-import net.kzeroko.dcmexpansion.DcmExpansion;
 import net.kzeroko.dcmexpansion.util.EnergyUtil;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -24,7 +23,7 @@ public class EnergyMeleeItem extends ItemEnergized {
         super(
                 ()-> FloatingLong.createConst(EnergyUtil.convertEnergy(chargeRate, EnergyUtil.Type.FE, EnergyUtil.Type.J)),
                 ()-> FloatingLong.createConst(EnergyUtil.convertEnergy(capacity, EnergyUtil.Type.FE, EnergyUtil.Type.J)),
-                (new Properties()).tab(DcmExpansion.WEAPONS).stacksTo(1).setNoRepair().fireResistant()
+                (new Properties()).stacksTo(1).setNoRepair().fireResistant()
         );
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builderOn = ImmutableMultimap.builder();
         builderOn.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", pAttackDamageModifier, AttributeModifier.Operation.ADDITION));
