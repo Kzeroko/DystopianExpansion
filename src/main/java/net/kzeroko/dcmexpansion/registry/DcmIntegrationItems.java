@@ -19,13 +19,9 @@ public class DcmIntegrationItems {
     public static final RegistryObject<Item> ERIS_VIRUS_JAR = ITEMS.register( "eris_virus_jar", ()-> new MaterialItem(3, Rarity.EPIC));
     public static final RegistryObject<Item> APOCALYPSE_VIRUS_JAR = ITEMS.register( "apocalypse_virus_jar", ()-> new MaterialItem(1, Rarity.EPIC));
     public static final RegistryObject<Item> GOLD_BAR = ITEMS.register( "gold_bar", ()-> new MaterialItem(16, Rarity.EPIC));
-    public static final RegistryObject<Item> INDUSTRIAL_ENGINE = ITEMS.register( "industrial_engine", ()-> new MaterialItem(1, Rarity.COMMON));
-    public static final RegistryObject<Item> LAPTOP_A = ITEMS.register( "laptop_a", ()-> new MaterialItem(6, Rarity.UNCOMMON));
-    public static final RegistryObject<Item> LAPTOP_B = ITEMS.register( "laptop_b", ()-> new MaterialItem(6, Rarity.UNCOMMON));
     public static final RegistryObject<Item> MOBILE_PHONE_A = ITEMS.register( "mobile_phone_a", ()-> new MaterialItem(6, Rarity.UNCOMMON));
     public static final RegistryObject<Item> FILLED_CANISTER = ITEMS.register( "filled_canister", ()-> new MaterialItem(16, Rarity.UNCOMMON));
     public static final RegistryObject<Item> TELLA_CPU = ITEMS.register( "tella_cpu", ()-> new MaterialItem(1, Rarity.EPIC));
-    public static final RegistryObject<Item> WIP_ENGINE = ITEMS.register( "wip_engine", ()-> new MaterialItem(3, Rarity.COMMON));
     public static final RegistryObject<Item> AIRCRAFT_CANISTER_T1 = ITEMS.register( "aircraft_canister_t1", ()-> new MaterialItem(16, Rarity.RARE));
     public static final RegistryObject<Item> AIRCRAFT_CANISTER_T2 = ITEMS.register( "aircraft_canister_t2", ()-> new MaterialItem(16, Rarity.RARE));
     public static final RegistryObject<Item> AIRCRAFT_CANISTER_T3 = ITEMS.register( "aircraft_canister_t3", ()-> new MaterialItem(16, Rarity.RARE));

@@ -24,6 +24,17 @@ public class DcmExpansionConfig { // TODO: Add more configurable-s
 
     public static class ServerSide {
 
+        public final ForgeConfigSpec.IntValue firstAidKitHP;
+        public final ForgeConfigSpec.IntValue modernMedkitHP;
+        public final ForgeConfigSpec.IntValue modernMedkitResistanceSeconds;
+        public final ForgeConfigSpec.IntValue adrenalineAbsorptionSeconds;
+        public final ForgeConfigSpec.IntValue adrenalineSpeedSeconds;
+        public final ForgeConfigSpec.IntValue serumHungerSeconds;
+        public final ForgeConfigSpec.IntValue serumAntiInfectionSeconds;
+        public final ForgeConfigSpec.BooleanValue serumAntiInfectionCure;
+        public final FirstAidItems bandage_pro;
+        public final ForgeConfigSpec.IntValue compressedBatteryCharge;
+
         ServerSide(ForgeConfigSpec.Builder builder) {
 
             builder.comment("Server-side config for DCM Expansion");
@@ -87,18 +98,6 @@ public class DcmExpansionConfig { // TODO: Add more configurable-s
             builder.pop();
         }
 
-
-        public final ForgeConfigSpec.IntValue firstAidKitHP;
-        public final ForgeConfigSpec.IntValue modernMedkitHP;
-        public final ForgeConfigSpec.IntValue modernMedkitResistanceSeconds;
-        public final ForgeConfigSpec.IntValue adrenalineAbsorptionSeconds;
-        public final ForgeConfigSpec.IntValue adrenalineSpeedSeconds;
-        public final ForgeConfigSpec.IntValue serumHungerSeconds;
-        public final ForgeConfigSpec.IntValue serumAntiInfectionSeconds;
-        public final ForgeConfigSpec.BooleanValue serumAntiInfectionCure;
-        public final FirstAidItems bandage_pro;
-        public final ForgeConfigSpec.IntValue compressedBatteryCharge;
-
         public static class FirstAidItems {
 
             public final ForgeConfigSpec.IntValue totalHeals;
@@ -125,7 +124,9 @@ public class DcmExpansionConfig { // TODO: Add more configurable-s
     }
 
     public static class ClientSide {
+
         public final ForgeConfigSpec.BooleanValue showPlayerNameplate;
+        public final ForgeConfigSpec.BooleanValue showThirst;
 
         public ClientSide(ForgeConfigSpec.Builder builder) {
 
@@ -137,6 +138,11 @@ public class DcmExpansionConfig { // TODO: Add more configurable-s
                     .comment("Whether the game renders player's nameplate or not")
                     .translation("config.dcmexpansion.showPlayerNameplate")
                     .define("showPlayerNameplate", false);
+
+            showThirst = builder
+                    .comment("Whether the game renders player's thirst or not")
+                    .translation("config.dcmexpansion.showThirst")
+                    .define("showThirst", false);
 
             builder.pop();
         }

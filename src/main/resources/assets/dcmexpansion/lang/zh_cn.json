@@ -14,14 +14,10 @@
   "item.dcmexpansion.light_emit_component": "发光组件",
   "item.dcmexpansion.eris_virus_jar": "厄里斯病毒",
   "item.dcmexpansion.apocalypse_virus_jar": "启示录病毒",
-  "item.dcmexpansion.gold_bar": "金条",
-  "item.dcmexpansion.industrial_engine": "工业引擎",
-  "item.dcmexpansion.laptop_a": "菠萝牌笔记本电脑",
-  "item.dcmexpansion.laptop_b": "FPO笔记本电脑",
+  "item.dcmexpansion.gold_bar": "算力金条",
   "item.dcmexpansion.mobile_phone_a": "智能手机",
   "item.dcmexpansion.filled_canister": "油桶",
   "item.dcmexpansion.tella_cpu": "TELLA-处理器",
-  "item.dcmexpansion.wip_engine": "未完工引擎",
   "item.dcmexpansion.aircraft_canister_t1": "飞行器燃料罐（普通）",
   "item.dcmexpansion.aircraft_canister_t2": "飞行器燃料罐（优级）",
   "item.dcmexpansion.aircraft_canister_t3": "飞行器燃料罐（特级）",
@@ -30,8 +26,6 @@
   "item.dcmexpansion.weather_tester_elite": "气候探测仪（精英）",
   "item.dcmexpansion.temperature_unit_normal": "控温单元（普通）",
   "item.dcmexpansion.temperature_unit_elite": "控温单元（精英）",
-  "item.dcmexpansion.bp_vest_light": "防弹衣（战术）",
-  "item.dcmexpansion.bp_vest_medium": "防弹衣（军用）",
   "item.dcmexpansion.repairkit_t1": "修理套件（废弃）",
   "item.dcmexpansion.repairkit_t2": "修理套件（进阶）",
   "item.dcmexpansion.repairkit_t3": "修理套件（军用）",
@@ -90,8 +84,8 @@
   "curios.identifier.unit": "单元插件",
   "curios.identifier.bpvest": "防弹衣",
 
-  "death.attack.hazard_gas": "%s吸入了过多致命气体",
-  "death.attack.hazard_gas.player": "%s在与%s的战斗过程中吸入了过多致命气体",
+  "death.attack.dcmexpansion.hazard_gas": "%s吸入了过多致命气体",
+  "death.attack.dcmexpansion.hazard_gas.player": "%s在与%s的战斗过程中吸入了过多致命气体",
 
   "desc.immersiveengineering.info.blueprint.tech_comp": "科技组件",
   "desc.immersiveengineering.info.blueprint.advanced_tech_comp": "先进科技组件",
@@ -112,5 +106,6 @@
   "config.dcmexpansion.serumAntiInfectionCure": "感染抗体注射器治愈感染",
   "config.dcmexpansion.compressedBatteryCharge": "空压电池充能量",
 
-  "config.dcmexpansion.showPlayerNameplate": "渲染玩家铭牌"
+  "config.dcmexpansion.showPlayerNameplate": "显示玩家铭牌",
+  "config.dcmexpansion.showThirst": "显示玩家口渴值（旧）"
 }

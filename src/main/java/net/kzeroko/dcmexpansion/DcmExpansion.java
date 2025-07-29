@@ -1,6 +1,7 @@
 package net.kzeroko.dcmexpansion;
 
 import com.mojang.logging.LogUtils;
+import dev.ghen.thirst.foundation.common.event.RegisterThirstValueEvent;
 import net.kzeroko.dcmexpansion.config.DcmExpansionConfig;
 import net.kzeroko.dcmexpansion.internal.DcmDamageSources;
 import net.kzeroko.dcmexpansion.internal.DcmTags;
@@ -37,7 +38,7 @@ public class DcmExpansion {
     //public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     //public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
 
-    // Event class
+    // Event class instance (Server)
     public static final GracetimeMessage GRACETIME_MESSAGE = new GracetimeMessage();
 
     // Curios slot icon
@@ -54,7 +55,6 @@ public class DcmExpansion {
         eventBus.addListener(this::processIMC);
         eventBus.addListener(this::addCreative);
 
-        DcmCreativeTabs.CREATIVE_MODE_TABS.register(eventBus);
         DcmEffects.EFFECTS.register(eventBus);
         DcmSounds.SOUNDS.register(eventBus);
 
@@ -67,8 +67,10 @@ public class DcmExpansion {
         DcmFirstaidItems.ITEMS.register(eventBus);
         DcmHealingItems.ITEMS.register(eventBus);
         DcmIntegrationItems.ITEMS.register(eventBus);
-        DcmMiscItems.ITEMS.register(eventBus);
+        DcmFoodNDrinksItems.ITEMS.register(eventBus);
         DcmWeapons.ITEMS.register(eventBus);
+
+        DcmCreativeTabs.CREATIVE_MODE_TABS.register(eventBus);
 
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, DcmExpansionConfig.serverSpec);
         modLoadingContext.registerConfig(ModConfig.Type.CLIENT, DcmExpansionConfig.clientSpec);
@@ -101,5 +103,10 @@ public class DcmExpansion {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
+    }
+
+    @SubscribeEvent
+    public void onRegisterThirst(RegisterThirstValueEvent event) {
+        event.addDrink(DcmFoodNDrinksItems.WATERBOTTLE_FILLED.get(), 14, 16);
     }
 }

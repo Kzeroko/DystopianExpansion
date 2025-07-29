@@ -12,14 +12,12 @@ import net.minecraft.world.damagesource.DamageType;
 public class DcmDamageSources {
     public static final ResourceKey<DamageType> HAZARD_GAS = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DcmExpansion.MOD_ID, "hazard_gas"));
 
-    public static class Sources {
-        private static Holder.Reference<DamageType> getHolder(RegistryAccess access, ResourceKey<DamageType> damageTypeKey) {
-            return access.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(damageTypeKey);
-        }
+    private static Holder.Reference<DamageType> getHolder(RegistryAccess access, ResourceKey<DamageType> damageTypeKey) {
+        return access.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(damageTypeKey);
+    }
 
-        public static DamageSource hazardGas(RegistryAccess access) {
-            return new DamageSource(getHolder(access, HAZARD_GAS));
-        }
+    public static DamageSource hazardGas(RegistryAccess access) {
+        return new DamageSource(getHolder(access, HAZARD_GAS));
     }
 
     public static void init() {

@@ -18,12 +18,12 @@ public class HazardGasEffect extends MobEffect {
 
             int multiplier = Math.min(amplifier + 1, 5);
 
-            entity.hurt(DcmDamageSources.Sources.hazardGas(player.level().registryAccess()), 2.0F * multiplier);
+            entity.hurt(DcmDamageSources.hazardGas(player.level().registryAccess()), 1.0F * multiplier);
         }
     }
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return duration % 25 == 0;
+        return duration % 60 == 0;
     }
 }

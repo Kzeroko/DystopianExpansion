@@ -11,13 +11,18 @@
     "common.LivingEntityMixin",
     "common.MobMixin",
     "common.securitycraft.BlockPocketWallBlockMixin",
-    "common.tacz.EntityKineticBulletMixin"
+    "common.tacz.EntityKineticBulletMixin",
+    "common.zombieextreme.BlackOpsCargoOpenProcedureMixin",
+    "common.zombieextreme.MilitaryCargoOpenProcedureMixin"
   ],
   "client": [
     "client.AbstractClientPlayerMixin",
     "client.EntityRendererMixin",
     "client.GuiMixin",
-    "client.firstaid.GuiHealthScreenMixin"
+    "client.firstaid.GuiHealthScreenMixin",
+    "client.firstaid.PlayerModelRendererMixin",
+    "client.thirst.HUDOverlayHandlerMixin",
+    "client.thirst.ThirstBarRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -14,14 +14,10 @@
   "item.dcmexpansion.light_emit_component": "Light Emit Component",
   "item.dcmexpansion.eris_virus_jar": "Eris Virus Jar",
   "item.dcmexpansion.apocalypse_virus_jar": "Apocalypse Virus Jar",
-  "item.dcmexpansion.gold_bar": "Gold Bar",
-  "item.dcmexpansion.industrial_engine": "Industrial Engine",
-  "item.dcmexpansion.laptop_a": "Pineapple Laptop",
-  "item.dcmexpansion.laptop_b": "FlexPO Laptop",
+  "item.dcmexpansion.gold_bar": "Hashrate Gold Bar",
   "item.dcmexpansion.mobile_phone_a": "Mobile Phone",
   "item.dcmexpansion.filled_canister": "Filled Canister",
   "item.dcmexpansion.tella_cpu": "TELLA-CPU",
-  "item.dcmexpansion.wip_engine": "Unfinished Engine",
   "item.dcmexpansion.aircraft_canister_t1": "Aircraft Canister (Common)",
   "item.dcmexpansion.aircraft_canister_t2": "Aircraft Canister (Fine)",
   "item.dcmexpansion.aircraft_canister_t3": "Aircraft Canister (Specialized)",
@@ -30,8 +26,6 @@
   "item.dcmexpansion.weather_tester_elite": "Weather Tester (Elite)",
   "item.dcmexpansion.temperature_unit_normal": "Temperature Control Module (Normal)",
   "item.dcmexpansion.temperature_unit_elite": "Temperature Control Module (Elite)",
-  "item.dcmexpansion.bp_vest_light": "Bullet-Proof Vest (Tactical)",
-  "item.dcmexpansion.bp_vest_medium": "Bullet-Proof Vest (Military)",
   "item.dcmexpansion.repairkit_t1": "Repair Kit (Scrap)",
   "item.dcmexpansion.repairkit_t2": "Repair Kit (Advanced)",
   "item.dcmexpansion.repairkit_t3": "Repair Kit (Military)",
@@ -90,8 +84,8 @@
   "curios.identifier.unit": "Unit Module",
   "curios.identifier.bpvest": "Bullet-Proof Vest",
 
-  "death.attack.hazard_gas": "%s breathed in too much hazard gas",
-  "death.attack.hazard_gas.player": "%s breathed in too much hazard gas while fighting %s",
+  "death.attack.dcmexpansion.hazard_gas": "%s breathed in too much hazard gas",
+  "death.attack.dcmexpansion.hazard_gas.player": "%s breathed in too much hazard gas while fighting %s",
 
   "desc.immersiveengineering.info.blueprint.tech_comp": "Tech Components",
   "desc.immersiveengineering.info.blueprint.advanced_tech_comp": "Advanced Tech Components",
@@ -112,5 +106,6 @@
   "config.dcmexpansion.serumAntiInfectionCure": "Anti-Infection Serum cures Infection",
   "config.dcmexpansion.compressedBatteryCharge": "Compressed Battery charge amount",
 
-  "config.dcmexpansion.showPlayerNameplate": "Render player's nameplate"
+  "config.dcmexpansion.showPlayerNameplate": "Display player's nameplate",
+  "config.dcmexpansion.showThirst": "Display player's thirst (Old)"
 }
